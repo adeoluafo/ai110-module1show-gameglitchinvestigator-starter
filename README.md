@@ -25,13 +25,17 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- This is a guessing game in which the user have a limited amount of trial. There are 3 difficulty levels with different ranges. A special number is what the user tries to guess as he playes the game.
+- I fixed the range bugs for the Medium and Hard difficulty level
+- I also fix the hint when a user is closer or farther from the special number
+- I change the range for the Hard difficulty level from (1-20) to (1-200) which was the max difficulty 
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+- ![alt text](image.png)
+
+- Challenge 1: Advanced Edge-Case Testing
+![alt text](.png)
 
 ## 🚀 Stretch Features
 
