@@ -1,15 +1,41 @@
 import random
 import streamlit as st
+from logic_utils import get_range_for_difficulty, check_guess
 
-from logic_utils import (
-    get_range_for_difficulty,
-    parse_guess,
-    check_guess,
-    update_score,
-)
- 
+def parse_guess(raw: str):
+    if raw is None:
+        return False, None, "Enter a guess."
+
+    if raw == "":
+        return False, None, "Enter a guess."
+
+    try:
+        if "." in raw:
+            value = int(float(raw))
+        else:
+            value = int(raw)
+    except Exception:
+        return False, None, "That is not a number."
+
+    return True, value, None
 
 
+def update_score(current_score: int, outcome: str, attempt_number: int):
+    if outcome == "Win":
+        points = 100 - 10 * (attempt_number + 1)
+        if points < 10:
+            points = 10
+        return current_score + points
+
+    if outcome == "Too High":
+        if attempt_number % 2 == 0:
+            return current_score + 5
+        return current_score - 5
+
+    if outcome == "Too Low":
+        return current_score - 5
+
+    return current_score
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
@@ -20,13 +46,13 @@ st.sidebar.header("Settings")
 
 difficulty = st.sidebar.selectbox(
     "Difficulty",
-    ["Easy", "Medium", "Hard"],
+    ["Easy", "Normal", "Hard"],
     index=1,
 )
 
 attempt_limit_map = {
     "Easy": 6,
-    "Medium": 8,
+    "Normal": 8,
     "Hard": 5,
 }
 attempt_limit = attempt_limit_map[difficulty]
@@ -54,7 +80,7 @@ if "history" not in st.session_state:
 st.subheader("Make a guess")
 
 st.info(
-    f"Guess a number between {low} and {high}. "
+    f"Guess a number between 1 and 100. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -80,9 +106,7 @@ with col3:
 
 if new_game:
     st.session_state.attempts = 0
-    # reset using the current difficulty bounds instead of hard‑coding 1..100
-    low2, high2 = get_range_for_difficulty(difficulty)
-    st.session_state.secret = random.randint(low2, high2)
+    st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
     st.rerun()
 
