@@ -9,14 +9,20 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   (for example: "the secret number kept changing" or "the hints were backwards").
 
 ---
+- The game looked like a typical simple interactive game
 
+- Hard is meant to have a more broader range
+- The hint is not accurate
+- The Normal range is meant to be for the Hard range
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
----
+--- 
+Answer:
+
 
 ## 3. Debugging and testing your fixes
 
